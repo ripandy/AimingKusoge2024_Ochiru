@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Kusoge.GameStates;
+using Kusoge.Interfaces;
 using UnityEngine;
 
 namespace Kusoge.Tests

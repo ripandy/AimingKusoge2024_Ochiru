@@ -16,7 +16,6 @@ namespace Kusoge.Tests
             var token = cts.Token;
             
             var player = new Player { hp = 100 };
-            player.Initialize();
             
             var beanLauncher = new BeanLauncher { launchRate = 10 };
             
@@ -25,6 +24,7 @@ namespace Kusoge.Tests
             using var playGameState = new PlayGameState(
                 player,
                 beanLauncher,
+                new DummyPlayerPresenter(),
                 inputProvider,
                 inputProvider,
                 new DummyBeanPresenter());

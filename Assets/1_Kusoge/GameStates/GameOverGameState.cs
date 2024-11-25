@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Kusoge.Entities;
+using Kusoge.Interfaces;
 
 namespace Kusoge.GameStates
 {
@@ -22,30 +23,6 @@ namespace Kusoge.GameStates
             var statistics = new GameStatistics(player.BeanEatenCount, player.ComboCount);
             var restart = await gameOverPresenter.Show(statistics, cancellationToken);
             return restart ? GameStateEnum.Intro : GameStateEnum.None;
-        }
-    }
-    
-    public interface IGameOverPresenter
-    {
-        /// <summary>
-        /// Presents with Game Over screen and returns true if user wants to restart the game.
-        /// </summary>
-        /// <returns>true to restart or false to exit.</returns>
-        ValueTask<bool> Show(GameStatistics statistics, CancellationToken cancellationToken = default);
-    }
-
-    /// <summary>
-    /// DTO for game-end statistics.
-    /// </summary>
-    public struct GameStatistics
-    {
-        public int Score { get; }
-        public int Combo { get; }
-        
-        public GameStatistics(int score, int combo)
-        {
-            Score = score;
-            Combo = combo;
         }
     }
 }

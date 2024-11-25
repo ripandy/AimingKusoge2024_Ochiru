@@ -1,12 +1,13 @@
+using System.Threading;
 using System.Threading.Tasks;
-using Kusoge.GameStates;
+using Kusoge.Interfaces;
 using UnityEngine;
 
 namespace Kusoge.Tests
 {
     public class DummyIntroPresenter : IIntroPresenter
     {
-        public async ValueTask Show()
+        public async ValueTask Show(CancellationToken cancellationToken = default)
         {
             var count = 3;
             while (count > 0)

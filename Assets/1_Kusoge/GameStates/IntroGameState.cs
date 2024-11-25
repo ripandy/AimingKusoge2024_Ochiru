@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Kusoge.Entities;
+using Kusoge.Interfaces;
 
 namespace Kusoge.GameStates
 {
@@ -24,7 +25,7 @@ namespace Kusoge.GameStates
         
         public async ValueTask<GameStateEnum> Running(CancellationToken cancellationToken = default)
         {
-            var showIntroTask = introPresenter.Show();
+            var showIntroTask = introPresenter.Show(cancellationToken);
             
             player.Initialize();
             beanLauncher.Initialize();
@@ -34,8 +35,5 @@ namespace Kusoge.GameStates
         }
     }
 
-    public interface IIntroPresenter
-    {
-        ValueTask Show();
-    }
+    
 }

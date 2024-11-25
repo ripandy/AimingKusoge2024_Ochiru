@@ -27,6 +27,7 @@ namespace Kusoge.Tests
             using var playGameState = new PlayGameState(
                 player,
                 beanLauncher,
+                new DummyPlayerPresenter(),
                 inputProvider,
                 inputProvider,
                 new DummyBeanPresenter());

@@ -1,4 +1,5 @@
 using System;
+using Kusoge.Interfaces;
 
 namespace Kusoge.Entities
 {
@@ -18,7 +19,9 @@ namespace Kusoge.Entities
         private const int BeanHeal = 1;
         private const int BeanDamage = BeanHeal * 20;
         
-        public void Initialize()
+        public Player() => Initialize();
+
+        internal void Initialize()
         {
             CurrentHp = hp;
             BeanEatenCount = 0;
@@ -26,24 +29,17 @@ namespace Kusoge.Entities
             Direction = DirectionEnum.Forward;
         }
 
-        public void EatBean()
+        internal void EatBean()
         {
             BeanEatenCount++;
             ComboCount++;
             CurrentHp = Math.Min(CurrentHp + BeanHeal, hp);
         }
 
-        public void Damaged()
+        internal void Damaged()
         {
             ComboCount = 0;
             CurrentHp = Math.Max(CurrentHp - BeanDamage, 0);
-        }
-        
-        public enum DirectionEnum
-        {
-            Forward = 0,
-            Left = -1,
-            Right = 1
         }
     }
 }

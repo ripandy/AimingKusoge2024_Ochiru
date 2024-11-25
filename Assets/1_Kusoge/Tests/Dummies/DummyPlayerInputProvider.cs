@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Kusoge.Entities;
-using Kusoge.GameStates;
+using Kusoge.Interfaces;
 using UnityEngine;
 
 namespace Kusoge.Tests
@@ -17,7 +17,7 @@ namespace Kusoge.Tests
             this.beanLauncher = beanLauncher;
         }
         
-        public async ValueTask<Player.DirectionEnum> WaitForDirectionInput(CancellationToken cancellationToken = default)
+        public async ValueTask<DirectionEnum> WaitForDirectionInput(CancellationToken cancellationToken = default)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Kusoge.Tests
             
             var direction = player.BeanEatenCount < 3 && beanLauncher.TryGetBean(player.BeanEatenCount, out var bean)
                 ? bean.ThrowDirection
-                : (Player.DirectionEnum)(Random.Range(0, 3) - 1);
+                : (DirectionEnum)(Random.Range(0, 3) - 1);
             Debug.Log($"Player Direction update: {direction}");
             return  direction;
         }

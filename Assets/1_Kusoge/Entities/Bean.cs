@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Kusoge.Interfaces;
 
 namespace Kusoge.Entities
 {
@@ -8,9 +9,9 @@ namespace Kusoge.Entities
         internal static int id;
         
         public int Id { get; }
-        public Player.DirectionEnum ThrowDirection { get; }
+        public DirectionEnum ThrowDirection { get; }
         
-        public Bean(Player.DirectionEnum throwDirection)
+        public Bean(DirectionEnum throwDirection)
         {
             Id = id++;
             ThrowDirection = throwDirection;
@@ -19,7 +20,7 @@ namespace Kusoge.Entities
 
     public interface IBeanPresenter
     {
-        ValueTask<bool> Show(int id, Player.DirectionEnum throwDirection, CancellationToken cancellationToken = default);
+        ValueTask<bool> Show(int id, DirectionEnum throwDirection, CancellationToken cancellationToken = default);
         void Hide(int id);
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Kusoge.Interfaces;
 
 namespace Kusoge.Entities
 {
@@ -23,7 +24,7 @@ namespace Kusoge.Entities
         public Bean LaunchBean()
         {
             var rndVal = rnd.Next(0, 3) - 1;
-            var bean = new Bean((Player.DirectionEnum)rndVal);
+            var bean = new Bean((DirectionEnum)rndVal);
             beans.Add(bean.Id, bean);
             return bean;
         }

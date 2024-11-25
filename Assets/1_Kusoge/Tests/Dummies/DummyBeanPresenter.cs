@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Kusoge.Entities;
+using Kusoge.Interfaces;
 using UnityEngine;
 
 namespace Kusoge.Tests
@@ -10,7 +11,7 @@ namespace Kusoge.Tests
     {
         private readonly HashSet<int> shownBeans = new();
         
-        public async ValueTask<bool> Show(int id, Player.DirectionEnum throwDirection, CancellationToken cancellationToken = default)
+        public async ValueTask<bool> Show(int id, DirectionEnum throwDirection, CancellationToken cancellationToken = default)
         {
             Debug.Log($"Showing bean id: {id}");
             shownBeans.Add(id);

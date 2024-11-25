@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Kusoge.Entities;
+using Kusoge.Interfaces;
 
 namespace Kusoge.GameStates
 {
@@ -9,6 +10,7 @@ namespace Kusoge.GameStates
     {
         private readonly Player player;
         private readonly BeanLauncher beanLauncher;
+        private readonly IPlayerDirectionPresenter playerPresenter;
         private readonly IPlayerDirectionInputProvider playerDirectionInputProvider;
         private readonly IPlayerBiteInputProvider playerBiteInputProvider;
         private readonly IBeanPresenter beanPresenter;
@@ -23,12 +25,14 @@ namespace Kusoge.GameStates
         public PlayGameState(
             Player player,
             BeanLauncher beanLauncher,
+            IPlayerDirectionPresenter playerPresenter,
             IPlayerDirectionInputProvider playerDirectionInputProvider,
             IPlayerBiteInputProvider playerBiteInputProvider,
             IBeanPresenter beanPresenter)
         {
             this.player = player;
             this.beanLauncher = beanLauncher;
+            this.playerPresenter = playerPresenter;
             this.playerDirectionInputProvider = playerDirectionInputProvider;
             this.playerBiteInputProvider = playerBiteInputProvider;
             this.beanPresenter = beanPresenter;
@@ -40,7 +44,7 @@ namespace Kusoge.GameStates
             tcs = new TaskCompletionSource<bool>();
             
             HandlePlayerDirectionInput();
-            InitializeBeanLauncher();
+            ExecuteBeanLauncher();
             HandlePlayerBiteInput();
 
             await tcs.Task;
@@ -55,43 +59,48 @@ namespace Kusoge.GameStates
             {
                 var direction = await playerDirectionInputProvider.WaitForDirectionInput(Token);
                 player.Direction = direction;
+                playerPresenter.Show(player.Direction);
             }
-            catch (TaskCanceledException)
+            catch (OperationCanceledException)
             {
-                // ignore
+                // state's over
+                playerPresenter.Show(DirectionEnum.Forward);
             }
             
-            if (Token.IsCancellationRequested) return;
+            if (cts == null || Token.IsCancellationRequested) return;
             HandlePlayerDirectionInput(); // Recursive Call
         }
 
-        private async void InitializeBeanLauncher()
+        private async void ExecuteBeanLauncher()
         {
             try
             {
-                // TODO: control launch timer
-                LaunchBeans();
+                LaunchBean();
                 await Task.Delay(beanLauncher.LaunchDelay, Token);
             }
-            catch (TaskCanceledException)
+            catch (OperationCanceledException)
             {
                 // ignore
             }
             
-            if (Token.IsCancellationRequested) return;
-            InitializeBeanLauncher(); // Recursive Call
+            if (cts == null || Token.IsCancellationRequested) return;
+            ExecuteBeanLauncher(); // Recursive Call
         }
 
-        private async void LaunchBeans()
+        private async void LaunchBean()
         {
             try
             {
                 var bean = beanLauncher.LaunchBean();
                 var dropped = await beanPresenter.Show(bean.Id, bean.ThrowDirection, Token);
+                await Task.Yield();
                 beanLauncher.RemoveBean(bean.Id);
                 if (!dropped) return;
+                
+                // Bean was dropped, hide it. Eaten beans are hidden by the player bite input.
+                beanPresenter.Hide(bean.Id);
             }
-            catch (TaskCanceledException)
+            catch (OperationCanceledException)
             {
                 tcs.TrySetResult(false);
                 return;
@@ -115,29 +124,20 @@ namespace Kusoge.GameStates
                     beanPresenter.Hide(bittenBean.Id);
                 }
             }
-            catch (TaskCanceledException)
+            catch (OperationCanceledException)
             {
                 // ignore
             }
             
-            if (Token.IsCancellationRequested) return;
+            if (cts == null || Token.IsCancellationRequested) return;
             HandlePlayerBiteInput(); // Recursive Call
         }
 
         public void Dispose()
         {
+            cts?.Cancel();
             cts?.Dispose();
             cts = null;
         }
-    }
-    
-    public interface IPlayerDirectionInputProvider
-    {
-        ValueTask<Player.DirectionEnum> WaitForDirectionInput(CancellationToken cancellationToken = default);
-    }
-    
-    public interface IPlayerBiteInputProvider
-    {
-        ValueTask<int> WaitForBite(CancellationToken cancellationToken = default);
     }
 }
