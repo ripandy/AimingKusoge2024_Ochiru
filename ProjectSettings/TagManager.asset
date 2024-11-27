@@ -42,5 +42,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 832476543
+    locked: 0
+  - name: Boba
+    uniqueID: 2042973147
+    locked: 0
+  - name: Launcher
+    uniqueID: 2643815811
+    locked: 0
+  - name: HUD
+    uniqueID: 4224797619
+    locked: 0
   m_RenderingLayers:
   - Default

@@ -613,6 +613,10 @@ PrefabInstance:
       propertyPath: m_FacePrefab
       value: 
       objectReference: {fileID: 5487462928751425614, guid: 59f711cd9503a4254b0cd8913b2acaa2, type: 3}
+    - target: {fileID: 2718301933225502882, guid: 6843b819bf3fe488cb0ef0df8dff3e3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5840244306279793205, guid: 6843b819bf3fe488cb0ef0df8dff3e3d, type: 3}
       propertyPath: m_Name
       value: ARFaceDetectionOrigin
@@ -623,6 +627,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6670642122543693440, guid: 6843b819bf3fe488cb0ef0df8dff3e3d, type: 3}
       propertyPath: m_TrackingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988961623468555055, guid: 6843b819bf3fe488cb0ef0df8dff3e3d, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
