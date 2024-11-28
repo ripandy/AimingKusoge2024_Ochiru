@@ -7,6 +7,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using Soar.Collections;
 using Soar.Events;
+using Soar.Variables;
 using UnityEngine;
 
 namespace Contents.Gameplay
@@ -15,46 +16,32 @@ namespace Contents.Gameplay
     {
         [Header("Input")]
         [SerializeField] private GameEvent<bool> mouthOpenEvent;
+        [SerializeField] private Variable<float> mouthColliderEnableDuration;
         
         [Header("Output")]
         [SerializeField] private GameEvent<int> bittenBeanEvent;
         
         [Header("Dependencies")]
         [SerializeField] private Collection<int, GameObject> beans;
-        [SerializeField] private GameObject mouthObject;
-        
-        private const float MouthColliderEnableDuration = 0.5f;
-        private Collider2D mouthCollider;
-        private SpriteRenderer mouthImage;
+        [SerializeField] private Collider2D mouthCollider;
 
         private IDisposable subscription;
 
         private void Start()
         {
-            mouthCollider = mouthObject.GetComponent<Collider2D>();
             mouthCollider.enabled = false;
-            
-            mouthImage = mouthObject.GetComponent<SpriteRenderer>();
-            
-            subscription = mouthOpenEvent.AsObservable().SubscribeAwait(CheckForBite, AwaitOperation.ThrottleFirstLast);
+            subscription = mouthOpenEvent.AsObservable().SubscribeAwait(CheckForBite, AwaitOperation.Drop);
         }
         
         private async ValueTask CheckForBite(bool opened, CancellationToken cancellationToken)
         {
-            if (opened)
-            {
-                mouthImage.color = Color.green;
-            }
-            
             if (opened || mouthCollider.enabled) return;
             
             mouthCollider.enabled = true;
-            mouthImage.color = Color.red;
             
-            await UniTask.Delay(TimeSpan.FromSeconds(MouthColliderEnableDuration), cancellationToken: cancellationToken);
+            await UniTask.Delay(TimeSpan.FromSeconds(mouthColliderEnableDuration), cancellationToken: cancellationToken);
             
             mouthCollider.enabled = false;
-            mouthImage.color = Color.white;
         }
         
         private void OnTriggerStay2D(Collider2D other)

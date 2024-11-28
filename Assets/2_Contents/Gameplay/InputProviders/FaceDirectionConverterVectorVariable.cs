@@ -34,7 +34,7 @@ namespace Contents.Gameplay
             current += directionVector.x >= faceLookThreshold ? 1 :
                 directionVector.x <= -faceLookThreshold ? -1 :
                 0;
-            current = Mathf.Clamp(-1, current, 1);
+            current = Mathf.Clamp(current, -1, 1);
             return (DirectionEnum)current;
 #endif
         }
