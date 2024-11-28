@@ -8,6 +8,8 @@ namespace Kusoge.GameStates
     {
         private readonly Player player;
         private readonly BeanLauncher beanLauncher;
+        private readonly IPlayerHealthPresenter playerHealthPresenter;
+        private readonly IPlayerStatsPresenter playerStatsPresenter;
         private readonly IIntroPresenter introPresenter;
         
         public GameStateEnum Id => GameStateEnum.Intro;
@@ -15,10 +17,14 @@ namespace Kusoge.GameStates
         public IntroGameState(
             Player player,
             BeanLauncher beanLauncher,
+            IPlayerHealthPresenter playerHealthPresenter,
+            IPlayerStatsPresenter playerStatsPresenter,
             IIntroPresenter introPresenter)
         {
             this.player = player;
             this.beanLauncher = beanLauncher;
+            this.playerHealthPresenter = playerHealthPresenter;
+            this.playerStatsPresenter = playerStatsPresenter;
             this.introPresenter = introPresenter;
         }
         
@@ -28,6 +34,9 @@ namespace Kusoge.GameStates
             
             player.Initialize();
             beanLauncher.Initialize();
+            
+            playerHealthPresenter.Show(player.HealthPercentage);
+            playerStatsPresenter.Show(player.GameStats);
             
             await showIntroTask;
             return GameStateEnum.GamePlay;

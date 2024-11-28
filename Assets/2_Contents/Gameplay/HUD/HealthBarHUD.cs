@@ -11,11 +11,6 @@ namespace Contents.Gameplay.HUD
 
         private IDisposable subscription;
 
-        private void Awake()
-        {
-            healthBarIcons = GetComponentsInChildren<Image>(includeInactive: true);
-        }
-
         private void Start()
         {
             subscription = healthPercentageVariable.Subscribe(UpdateHealthBar);
@@ -23,6 +18,8 @@ namespace Contents.Gameplay.HUD
 
         private void UpdateHealthBar(float healthPercentage)
         {
+            if (healthBarIcons.Length == 0) return;
+            
             var ratioPerIcon = 1f / healthBarIcons.Length;
             for (var i = 0; i < healthBarIcons.Length; i++)
             {

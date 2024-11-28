@@ -19,11 +19,11 @@ namespace Kusoge.Tests
             var beanLauncher = new BeanLauncher { launchRate = 10 };
             
             // Game States
-            var introGameState = new IntroGameState(player, beanLauncher, new DummyIntroPresenter());
+            var playerPresenter = new DummyPlayerPresenter();
+            
+            var introGameState = new IntroGameState(player, beanLauncher, playerPresenter, playerPresenter, new DummyIntroPresenter());
 
             var inputProvider = new DummyPlayerInputProvider(player, beanLauncher);
-            
-            var playerPresenter = new DummyPlayerPresenter();
             
             using var playGameState = new PlayGameState(
                 player,

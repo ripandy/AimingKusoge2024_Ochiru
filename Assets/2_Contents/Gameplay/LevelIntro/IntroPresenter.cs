@@ -11,6 +11,8 @@ namespace Contents.Gameplay
     public class IntroPresenter : MonoBehaviour, IIntroPresenter
     {
         [SerializeField] private Transform[] introObjects;
+
+        private bool firstRun = true;
         
         public async ValueTask Show(CancellationToken cancellationToken = default)
         {
@@ -25,8 +27,13 @@ namespace Contents.Gameplay
                     .WithEase(Ease.InBounce)
                     .Bind(newScale => obj.localScale = newScale)
                     .ToUniTask(destroyCancellationToken);
-            })
-                .Append(UniTask.Delay(1000, cancellationToken: cancellationToken)); // Debugging purpose
+            });
+            
+            if (firstRun)
+            {
+                tasks = tasks.Prepend(UniTask.Delay(1000, cancellationToken: cancellationToken));
+                firstRun = false;
+            }
 
             await UniTask.WhenAll(tasks);
         }

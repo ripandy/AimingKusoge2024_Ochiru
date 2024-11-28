@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa926f71605240edb6cf9f41ab264657, type: 3}
   m_Name: HealthPercentageVariable
   m_EditorClassIdentifier: 
-  value: 0.11
+  value: 0
   valueEventType: 0
   autoResetValue: 1

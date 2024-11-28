@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FaceDirectionConverterVectorVariable
   m_EditorClassIdentifier: 
   value: {x: 0, y: 0}
-  valueEventType: 0
+  valueEventType: 1
   autoResetValue: 1
   faceLookThreshold: 0.3
