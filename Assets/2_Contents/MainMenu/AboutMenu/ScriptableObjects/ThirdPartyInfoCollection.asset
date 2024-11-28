@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3579af21e79341c3a57b8c3c798d3861, type: 3}
+  m_Name: ThirdPartyInfoCollection
+  m_EditorClassIdentifier: Assembly-CSharp:Features.AboutMenu:ThirdPartyInfoCollection
+  defaultSubscribeBehavior: 0
+  _value:
+  - componentName: Kassets
+    licenseType: MIT
+    licenseText: 'MIT License
+
+
+      Copyright (c) 2021-2022 Kadinche, Corp.
+
+
+      Permission
+      is hereby granted, free of charge, to any person obtaining a copy of this software
+      and associated documentation files (the "Software"), to deal in the Software
+      without restriction, including without limitation the rights to use, copy,
+      modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+      and to permit persons to whom the Software is furnished to do so, subject to
+      the following conditions:
+
+
+      The above copyright notice and this permission
+      notice shall be included in all copies or substantial portions of the Software.
+
+
+      THE
+      SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+      INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+      A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+      COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+      IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+      WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'
+  - componentName: UniRx
+    licenseType: MIT
+    licenseText: 'The MIT License (MIT)
+
+
+      Copyright (c) 2018 Yoshifumi Kawai
+
+
+      Permission
+      is hereby granted, free of charge, to any person obtaining a copy of this software
+      and associated documentation files (the "Software"), to deal in the Software
+      without restriction, including without limitation the rights to use, copy,
+      modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+      and to permit persons to whom the Software is furnished to do so, subject to
+      the following conditions:
+
+
+      The above copyright notice and this permission
+      notice shall be included in all copies or substantial portions of the Software.
+
+
+      THE
+      SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+      INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+      A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+      COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+      IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+      WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'
+  - componentName: UniTask
+    licenseType: MIT
+    licenseText: 'The MIT License (MIT)
+
+
+      Copyright (c) 2019 Yoshifumi Kawai
+      / Cysharp, Inc.
+
+
+      Permission is hereby granted, free of charge, to any
+      person obtaining a copy of this software and associated documentation files
+      (the "Software"), to deal in the Software without restriction, including without
+      limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+      and/or sell copies of the Software, and to permit persons to whom the Software
+      is furnished to do so, subject to the following conditions:
+
+
+      The above
+      copyright notice and this permission notice shall be included in all copies
+      or substantial portions of the Software.
+
+
+      THE SOFTWARE IS PROVIDED "AS
+      IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+      TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+      NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+      FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+      TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+      OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'
+  - componentName: VContainer
+    licenseType: MIT
+    licenseText: 'Copyright (c) 2020 hadashiA
+
+
+      Permission is hereby granted,
+      free of charge, to any person obtaining a copy of this software and associated
+      documentation files (the "Software"), to deal in the Software without restriction,
+      including without limitation the rights to use, copy, modify, merge, publish,
+      distribute, sublicense, and/or sell copies of the Software, and to permit persons
+      to whom the Software is furnished to do so, subject to the following conditions:
+
+
+      The
+      above copyright notice and this permission notice shall be included in all
+      copies or substantial portions of the Software.
+
+
+      THE SOFTWARE IS PROVIDED
+      "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+      LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+      AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+      LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+      TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+      OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'
+  - componentName: Asset Usage Detector
+    licenseType: MIT
+    licenseText: "MIT License\n\nCopyright (c) 2016 S\xFCleyman Yasir KULA\n\nPermission
+      is hereby granted, free of charge, to any person obtaining a copy of this software
+      and associated documentation files (the \"Software\"), to deal in the Software
+      without restriction, including without limitation the rights to use, copy,
+      modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+      and to permit persons to whom the Software is furnished to do so, subject to
+      the following conditions:\n\nThe above copyright notice and this permission
+      notice shall be included in all copies or substantial portions of the Software.\n\nTHE
+      SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+      INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+      A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+      COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+      IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+      WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+  - componentName: 'RPG Urban Pack 1.0 '
+    licenseType: CC0
+    licenseText: "\t\r\n\r\n\tRPG Urban Pack 1.0\r\n\r\n\tCreated/distributed by
+      Kenney (www.kenney.nl)\r\n\tCreation date: 05-01-2019\r\n\r\n\t\t\t------------------------------\r\n\r\n\tLicense:
+      (Creative Commons Zero, CC0)\r\n\thttp://creativecommons.org/publicdomain/zero/1.0/\r\n\r\n\tThis
+      content is free to use in personal, educational and commercial projects.\r\r\n\tSupport
+      us by crediting Kenney or www.kenney.nl (this is not mandatory)\r\n\r\n\t\t\t------------------------------\r\n\r\n\tDonate:  
+      http://support.kenney.nl\r\n\tRequest:  http://request.kenney.nl\r\n\tPatreon: 
+      http://patreon.com/kenney/\r\n\r\n\tFollow on Twitter for updates:\r\n\thttp://twitter.com/KenneyNL"
+  variableEventType: 0
+  autoResetValue: 0
