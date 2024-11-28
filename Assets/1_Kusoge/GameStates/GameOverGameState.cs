@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Kusoge.DataTransferObjects;
 using Kusoge.Interfaces;
-using UnityEngine;
 
 namespace Kusoge.GameStates
 {
@@ -21,13 +20,8 @@ namespace Kusoge.GameStates
 
         public async ValueTask<GameStateEnum> Running(CancellationToken cancellationToken = default)
         {
-            Debug.Log($"[{GetType().Name}] Initializing statistics.");
-            var stats = new GameStatsDto(player.BeanEatenCount, player.ComboCount);
-            
-            Debug.Log($"[{GetType().Name}] Showing game over presenter. statistics: {stats.Score}, {stats.Combo}");
-            var restart = await gameOverPresenter.Show(stats, cancellationToken);
-            
-            Debug.Log($"[{GetType().Name}] Game over presenter finished. Restart: {restart}");
+            var statistics = new GameStatsDto(player.BeanEatenCount, player.ComboCount);
+            var restart = await gameOverPresenter.Show(statistics, cancellationToken);
             return restart ? GameStateEnum.Intro : GameStateEnum.None;
         }
     }
