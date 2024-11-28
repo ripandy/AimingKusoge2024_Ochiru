@@ -61,7 +61,7 @@ namespace Contents.Gameplay
             if (opened || currentSprite.Value.HasFlag(PlayerSpriteEnum.Bite)) return;
 
             currentSprite.Value = (currentSprite.Value &
-                                  ~(PlayerSpriteEnum.MouthOpen | PlayerSpriteEnum.Blink | PlayerSpriteEnum.Idle))
+                                   (PlayerSpriteEnum.Left | PlayerSpriteEnum.Right))
                                   | PlayerSpriteEnum.Bite;
             
             await UniTask.Delay(TimeSpan.FromSeconds(mouthColliderEnableDuration), cancellationToken: cancellationToken);
@@ -84,7 +84,6 @@ namespace Contents.Gameplay
 
         private void UpdateSprite(PlayerSpriteEnum newSpriteFlag)
         {
-            Debug.Log($"[{GetType().Name}] UpdateSprite: {newSpriteFlag}");
             if (!playerSpriteCollection.TryGetValue(newSpriteFlag, out var sprite)) return;
             spriteRenderer.sprite = sprite;
         }

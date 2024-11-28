@@ -7,8 +7,7 @@ namespace Contents.Gameplay.HUD
     public class HealthBarHUD : MonoBehaviour
     {
         [SerializeField] private HealthPercentageVariable healthPercentageVariable;
-        
-        private Image[] healthBarIcons;
+        [SerializeField] private Image[] healthBarIcons;
 
         private IDisposable subscription;
 

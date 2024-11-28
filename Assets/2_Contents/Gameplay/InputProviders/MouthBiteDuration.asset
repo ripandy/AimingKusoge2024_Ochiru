@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0fcadf387a746efa33a86d7b471d29, type: 3}
   m_Name: MouthBiteDuration
   m_EditorClassIdentifier: 
-  value: 0.5
+  value: 0.25
   valueEventType: 1
   autoResetValue: 1
