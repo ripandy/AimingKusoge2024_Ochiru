@@ -5,12 +5,11 @@ using UnityEngine;
 
 namespace Contents.Gameplay
 {
-    public class PlayerPresenter : MonoBehaviour
+    public class PlayerDirectionPresenter : MonoBehaviour
     {
-        [SerializeField] private GameEvent<DirectionEnum> playerPlayerDirection;
+        [SerializeField] private GameEvent<DirectionEnum> playerDirection;
         [SerializeField] private Transform playerRoot;
-        [SerializeField] private Transform mouthTransform;
-        [SerializeField] private float lookDistance = 1.8f;
+        [SerializeField] private float lookDistance = 1.5f;
 
         private IDisposable subscription;
         
@@ -18,8 +17,8 @@ namespace Contents.Gameplay
 
         private void Start()
         {
-            defaultPosition = mouthTransform.localPosition;
-            subscription = playerPlayerDirection.Subscribe(OnPlayerEvent);
+            defaultPosition = playerRoot.localPosition;
+            subscription = playerDirection.Subscribe(OnPlayerEvent);
         }
 
         private void OnPlayerEvent(DirectionEnum direction)
@@ -32,7 +31,7 @@ namespace Contents.Gameplay
                 DirectionEnum.Right => lookDistance,
                 _ => 0
             };
-            mouthTransform.localPosition = position;
+            playerRoot.localPosition = position;
         }
         
         private void OnDestroy()

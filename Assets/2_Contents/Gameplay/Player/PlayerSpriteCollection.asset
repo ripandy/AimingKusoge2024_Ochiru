@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485136c7ccc5438ca61dc82506b7e7ac, type: 3}
+  m_Name: PlayerSpriteCollection
+  m_EditorClassIdentifier: 
+  list:
+  - <Key>k__BackingField: 5
+    <Value>k__BackingField: {fileID: 21300000, guid: 5a0c4ccea112f4b23a698079a5629739, type: 3}
+  - <Key>k__BackingField: 6
+    <Value>k__BackingField: {fileID: 21300000, guid: 1491c8c5be51f4549a78fcc98d7adc70, type: 3}
+  - <Key>k__BackingField: 9
+    <Value>k__BackingField: {fileID: 21300000, guid: 4815ec90c62b34481acf903d3a239e6a, type: 3}
+  - <Key>k__BackingField: 10
+    <Value>k__BackingField: {fileID: 21300000, guid: 80da167b90feb49598438068145e6f80, type: 3}
+  - <Key>k__BackingField: 21
+    <Value>k__BackingField: {fileID: 21300000, guid: b1221693540bb4aff8ab77fb8d07adbb, type: 3}
+  - <Key>k__BackingField: 22
+    <Value>k__BackingField: {fileID: 21300000, guid: e2a73696107f14669bd8ffd7234920b0, type: 3}
+  - <Key>k__BackingField: 25
+    <Value>k__BackingField: {fileID: 21300000, guid: 404a0002f71e940dd82578c81ab9cb5f, type: 3}
+  - <Key>k__BackingField: 26
+    <Value>k__BackingField: {fileID: 21300000, guid: 0a3913fcdefc141f9963a91d6532b8e2, type: 3}
+  - <Key>k__BackingField: 37
+    <Value>k__BackingField: {fileID: 21300000, guid: 1efd1cf071d4244a3970701657567f4e, type: 3}
+  - <Key>k__BackingField: 38
+    <Value>k__BackingField: {fileID: 21300000, guid: 63bbe4a69107c4190a6af53ea92b13b3, type: 3}
+  - <Key>k__BackingField: 41
+    <Value>k__BackingField: {fileID: 21300000, guid: 2ca375dcddb8a40038ef04ec6a6081dd, type: 3}
+  - <Key>k__BackingField: 42
+    <Value>k__BackingField: {fileID: 21300000, guid: 3c4841b3c110d4ac185b1f5cdd075c17, type: 3}
+  - <Key>k__BackingField: 64
+    <Value>k__BackingField: {fileID: 21300000, guid: 595c2b2c18f6a4b08ba21369a791a9c0, type: 3}
+  - <Key>k__BackingField: 80
+    <Value>k__BackingField: {fileID: 21300000, guid: ef3fa1af3b4a4438ab11970186001525, type: 3}
+  - <Key>k__BackingField: 96
+    <Value>k__BackingField: {fileID: 21300000, guid: 3035ee6191ed7401db6ced6b2bfff994, type: 3}
+  valueEventType: 0
+  autoResetValue: 1
