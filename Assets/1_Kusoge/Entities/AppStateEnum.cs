@@ -1,4 +1,4 @@
-namespace Kusoge.ApplicationStates
+namespace Kusoge
 {
     public enum AppStateEnum
     {

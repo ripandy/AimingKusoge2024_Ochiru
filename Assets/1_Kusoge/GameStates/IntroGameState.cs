@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Kusoge.Entities;
 using Kusoge.Interfaces;
 
 namespace Kusoge.GameStates

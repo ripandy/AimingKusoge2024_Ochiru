@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Kusoge.DataTransferObjects;
 
 namespace Kusoge.Interfaces
 {
@@ -8,6 +9,16 @@ namespace Kusoge.Interfaces
         Forward = 0,
         Left = -1,
         Right = 1
+    }
+
+    public interface IPlayerHealthPresenter
+    {
+        void Show(float healthPercentage);
+    }
+    
+    public interface IPlayerStatsPresenter
+    {
+        void Show(GameStatsDto statsDto);
     }
     
     public interface IPlayerDirectionPresenter

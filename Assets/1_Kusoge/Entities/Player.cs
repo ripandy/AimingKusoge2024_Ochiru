@@ -1,25 +1,32 @@
 using System;
+using Kusoge.DataTransferObjects;
 using Kusoge.Interfaces;
 
-namespace Kusoge.Entities
+namespace Kusoge
 {
     [Serializable]
     public class Player
     {
         public int hp = 100;
         
-        public int CurrentHp { get; set; }
-        public int BeanEatenCount { get; set; }
+        internal int CurrentHp { get; set; }
+        internal int BeanEatenCount { get; set; }
         public int ComboCount { get; set; }
         
         public DirectionEnum Direction { get; set; }
 
-        public bool IsAlive => CurrentHp > 0;
+        internal bool IsAlive => CurrentHp > 0;
+        internal float HealthPercentage => (float)CurrentHp / hp;
 
         private const int BeanHeal = 1;
         private const int BeanDamage = BeanHeal * 20;
         
-        public Player() => Initialize();
+        public Player()
+        {
+            Initialize();
+        }
+
+        public GameStatsDto GameStats => new(BeanEatenCount, ComboCount);
 
         internal void Initialize()
         {

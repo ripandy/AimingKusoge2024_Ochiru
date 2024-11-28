@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Kusoge.Entities;
 using Kusoge.Interfaces;
 
 namespace Kusoge.GameStates
@@ -10,7 +9,9 @@ namespace Kusoge.GameStates
     {
         private readonly Player player;
         private readonly BeanLauncher beanLauncher;
-        private readonly IPlayerDirectionPresenter playerPresenter;
+        private readonly IPlayerHealthPresenter playerHealthPresenter;
+        private readonly IPlayerStatsPresenter playerStatsPresenter;
+        private readonly IPlayerDirectionPresenter playerDirectionPresenter;
         private readonly IPlayerDirectionInputProvider playerDirectionInputProvider;
         private readonly IPlayerBiteInputProvider playerBiteInputProvider;
         private readonly IBeanPresenter beanPresenter;
@@ -25,14 +26,18 @@ namespace Kusoge.GameStates
         public PlayGameState(
             Player player,
             BeanLauncher beanLauncher,
-            IPlayerDirectionPresenter playerPresenter,
+            IPlayerHealthPresenter playerHealthPresenter,
+            IPlayerStatsPresenter playerStatsPresenter,
+            IPlayerDirectionPresenter playerDirectionPresenter,
             IPlayerDirectionInputProvider playerDirectionInputProvider,
             IPlayerBiteInputProvider playerBiteInputProvider,
             IBeanPresenter beanPresenter)
         {
             this.player = player;
             this.beanLauncher = beanLauncher;
-            this.playerPresenter = playerPresenter;
+            this.playerHealthPresenter = playerHealthPresenter;
+            this.playerStatsPresenter = playerStatsPresenter;
+            this.playerDirectionPresenter = playerDirectionPresenter;
             this.playerDirectionInputProvider = playerDirectionInputProvider;
             this.playerBiteInputProvider = playerBiteInputProvider;
             this.beanPresenter = beanPresenter;
@@ -59,12 +64,12 @@ namespace Kusoge.GameStates
             {
                 var direction = await playerDirectionInputProvider.WaitForDirectionInput(Token);
                 player.Direction = direction;
-                playerPresenter.Show(player.Direction);
+                playerDirectionPresenter.Show(player.Direction);
             }
             catch (OperationCanceledException)
             {
                 // state's over
-                playerPresenter.Show(DirectionEnum.Forward);
+                playerDirectionPresenter.Show(DirectionEnum.Forward);
             }
             
             if (cts == null || Token.IsCancellationRequested) return;
@@ -107,6 +112,7 @@ namespace Kusoge.GameStates
             }
             
             player.Damaged();
+            playerHealthPresenter.Show(player.HealthPercentage);
             if (player.IsAlive) return;
 
             cts?.Cancel();
@@ -121,6 +127,8 @@ namespace Kusoge.GameStates
                 if (beanLauncher.TryGetBean(bittenId, out var bittenBean))
                 {
                     player.EatBean();
+                    playerHealthPresenter.Show(player.HealthPercentage);
+                    playerStatsPresenter.Show(player.GameStats);
                     beanPresenter.Hide(bittenBean.Id);
                 }
             }

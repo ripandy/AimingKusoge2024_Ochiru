@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Kusoge.Entities;
 using Kusoge.GameStates;
 using NUnit.Framework;
 
@@ -24,10 +23,14 @@ namespace Kusoge.Tests
 
             var inputProvider = new DummyPlayerInputProvider(player, beanLauncher);
             
+            var playerPresenter = new DummyPlayerPresenter();
+            
             using var playGameState = new PlayGameState(
                 player,
                 beanLauncher,
-                new DummyPlayerPresenter(),
+                playerPresenter,
+                playerPresenter,
+                playerPresenter,
                 inputProvider,
                 inputProvider,
                 new DummyBeanPresenter());

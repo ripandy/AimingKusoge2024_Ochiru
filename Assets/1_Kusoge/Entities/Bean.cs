@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Kusoge.Interfaces;
 
-namespace Kusoge.Entities
+namespace Kusoge
 {
     public struct Bean
     {

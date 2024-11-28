@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Kusoge.Entities;
 using Kusoge.Interfaces;
 using UnityEngine;
 
@@ -27,8 +26,9 @@ namespace Kusoge.Tests
             {
                 // ignore
             }
-            
-            var direction = player.BeanEatenCount < 3 && beanLauncher.TryGetBean(player.BeanEatenCount, out var bean)
+
+            var gameStats = player.GameStats;
+            var direction = gameStats.Score < 3 && beanLauncher.TryGetBean(gameStats.Score, out var bean)
                 ? bean.ThrowDirection
                 : (DirectionEnum)(Random.Range(0, 3) - 1);
             Debug.Log($"Player Direction update: {direction}");
@@ -46,8 +46,9 @@ namespace Kusoge.Tests
                 // ignore
             }
             
-            var beanId = player.BeanEatenCount < 3
-                ? player.BeanEatenCount
+            var gameStats = player.GameStats;
+            var beanId = gameStats.Score < 3
+                ? gameStats.Score
                 : Random.Range(0, beanLauncher.LaunchedBeanCount * 2);
             if (beanLauncher.TryGetBean(beanId, out var bean) && bean.ThrowDirection == player.Direction)
             {

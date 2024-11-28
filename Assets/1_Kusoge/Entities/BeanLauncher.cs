@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Kusoge.Interfaces;
 
-namespace Kusoge.Entities
+namespace Kusoge
 {
     [Serializable]
     public class BeanLauncher

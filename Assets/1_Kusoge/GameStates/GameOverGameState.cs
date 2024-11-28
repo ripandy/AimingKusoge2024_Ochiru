@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Kusoge.Entities;
+using Kusoge.DataTransferObjects;
 using Kusoge.Interfaces;
 
 namespace Kusoge.GameStates
@@ -20,7 +20,7 @@ namespace Kusoge.GameStates
 
         public async ValueTask<GameStateEnum> Running(CancellationToken cancellationToken = default)
         {
-            var statistics = new GameStatistics(player.BeanEatenCount, player.ComboCount);
+            var statistics = new GameStatsDto(player.BeanEatenCount, player.ComboCount);
             var restart = await gameOverPresenter.Show(statistics, cancellationToken);
             return restart ? GameStateEnum.Intro : GameStateEnum.None;
         }
