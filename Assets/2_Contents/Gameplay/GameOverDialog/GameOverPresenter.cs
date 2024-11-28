@@ -26,8 +26,9 @@ namespace Contents.Gameplay
                     .WithEase(Ease.InBounce)
                     .Bind(newScale => obj.localScale = newScale)
                     .ToUniTask(destroyCancellationToken);
-            })
-                .Append(UniTask.Delay(1000, cancellationToken: cancellationToken)); // Debugging purpose;
+            });
+                
+            tasks = tasks.Append(UniTask.Delay(1000, cancellationToken: cancellationToken)); // Debugging purpose;
 
             await UniTask.WhenAll(tasks);
             
