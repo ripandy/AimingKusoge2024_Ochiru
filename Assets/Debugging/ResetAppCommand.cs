@@ -10,7 +10,7 @@ namespace Debugging
     {
         public override void Execute()
         {
-            SceneManager.LoadScene("Boot");
+            SceneManager.LoadScene("Core");
         }
     }
 }
