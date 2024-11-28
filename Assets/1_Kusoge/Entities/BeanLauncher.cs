@@ -7,13 +7,13 @@ namespace Kusoge
     [Serializable]
     public class BeanLauncher
     {
-        public int launchRate = 2;
+        public float launchRate = 2;
         
         private readonly Dictionary<int, Bean> beans = new();
         private readonly Random rnd = new();
         
         public int LaunchedBeanCount => beans.Count;
-        public int LaunchDelay => 1000 / launchRate;
+        public int LaunchDelay => (int)Math.Floor(1000 / launchRate);
 
         public void Initialize()
         {
@@ -37,6 +37,11 @@ namespace Kusoge
         public void RemoveBean(int id)
         {
             beans.Remove(id);
+        }
+
+        public void UpdateLaunchRate(int comboCount)
+        {
+            launchRate = (float)Math.Max(1, Math.Log(comboCount, 2) * 0.5f);
         }
     }
 }

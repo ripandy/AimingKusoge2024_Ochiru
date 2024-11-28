@@ -129,6 +129,7 @@ namespace Kusoge.GameStates
                     player.EatBean();
                     playerHealthPresenter.Show(player.HealthPercentage);
                     playerStatsPresenter.Show(player.GameStats);
+                    beanLauncher.UpdateLaunchRate(player.ComboCount);
                     beanPresenter.Hide(bittenBean.Id);
                 }
             }
