@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Kusoge.DataTransferObjects;
 using Kusoge.Interfaces;
 using LitMotion;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace Contents.Gameplay
     {
         [SerializeField] private Transform[] animationObjects;
         
-        public async ValueTask<bool> Show(GameStatistics statistics, CancellationToken cancellationToken = default)
+        public async ValueTask<bool> Show(GameStatsDto stats, CancellationToken cancellationToken = default)
         {
             const float duration = 0.5f;
             const int delayFactor = 100;

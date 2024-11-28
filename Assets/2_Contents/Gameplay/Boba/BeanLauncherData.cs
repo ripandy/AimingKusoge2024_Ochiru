@@ -1,4 +1,4 @@
-using Kusoge.Entities;
+using Kusoge;
 using Soar.Variables;
 
 namespace Contents.Gameplay

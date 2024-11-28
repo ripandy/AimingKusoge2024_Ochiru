@@ -1,5 +1,6 @@
+using Contents.Gameplay.HUD;
 using Doinject;
-using Kusoge.Entities;
+using Kusoge;
 using Kusoge.GameStates;
 using Kusoge.Interfaces;
 using UnityEngine;
@@ -10,12 +11,15 @@ namespace Contents.Gameplay
     {
         [SerializeField] private PlayerData playerData;
         [SerializeField] private BeanLauncherData beanLauncherData;
+
+        [SerializeField] private HealthPercentageVariable healthPercentageVariable;
+        [SerializeField] private GameStatsVariable gameStatsVariable;
         
         [SerializeField] private BeanPresenter beanPresenter;
         [SerializeField] private IntroPresenter introPresenter;
         [SerializeField] private GameOverPresenter gameOverPresenter;
 
-        [SerializeField] private PlayerDirectionVariable playerPlayerDirection;
+        [SerializeField] private PlayerDirectionVariable playerDirectionVariable;
         [SerializeField] private FaceDirectionConverterVectorVariable faceDirectionConverterVectorVariable;
         [SerializeField] private BittenBeanGameEvent bittenBeanGameEvent;
 
@@ -29,7 +33,9 @@ namespace Contents.Gameplay
             container.BindSingleton<GameOverGameState>();
 
             // Presenters
-            container.BindFromInstance<IPlayerDirectionPresenter>(playerPlayerDirection);
+            container.BindFromInstance<IPlayerHealthPresenter>(healthPercentageVariable);
+            container.BindFromInstance<IPlayerStatsPresenter>(gameStatsVariable);
+            container.BindFromInstance<IPlayerDirectionPresenter>(playerDirectionVariable);
             container.BindFromInstance<IBeanPresenter>(beanPresenter);
             container.BindFromInstance<IIntroPresenter>(introPresenter);
             container.BindFromInstance<IGameOverPresenter>(gameOverPresenter);
