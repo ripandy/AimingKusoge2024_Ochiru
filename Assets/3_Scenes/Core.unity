@@ -1041,10 +1041,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PyrasLabSplashScreen
       objectReference: {fileID: 0}
-    - target: {fileID: 4661209064216967722, guid: b6ecf94226d27434680fbd31dd89a6de, type: 3}
-      propertyPath: nextState
-      value: Gameplay
-      objectReference: {fileID: 0}
     - target: {fileID: 4661209064216967723, guid: b6ecf94226d27434680fbd31dd89a6de, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
