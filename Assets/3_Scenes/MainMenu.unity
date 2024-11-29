@@ -358,6 +358,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TapToStartButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7132223957958935625, guid: b614982c7a6124e579269abba8c60d8c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7132223957958935626, guid: b614982c7a6124e579269abba8c60d8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

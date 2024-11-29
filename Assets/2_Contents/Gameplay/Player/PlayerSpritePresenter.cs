@@ -25,7 +25,6 @@ namespace Contents.Gameplay
 
         private void Start()
         {
-            Debug.Log($"[{GetType().Name}] Start. playerSpriteCollection: {playerSpriteCollection.Count}");
             var s1 = playerDirection.Subscribe(OnPlayerDirection);
             var s2 = mouthOpenEvent.AsObservable().SubscribeAwait(OnMouthOpen, AwaitOperation.Drop);
             
@@ -97,9 +96,7 @@ namespace Contents.Gameplay
 
         private void UpdateSprite(PlayerSpriteEnum newSpriteFlag)
         {
-            Debug.Log($"[{GetType().Name}] UpdateSprite: {newSpriteFlag}");
             if (!playerSpriteCollection.TryGetValue(newSpriteFlag, out var sprite)) return;
-            Debug.Log($"[{GetType().Name}] Setting sprite: {newSpriteFlag}");
             spriteRenderer.sprite = sprite;
         }
 

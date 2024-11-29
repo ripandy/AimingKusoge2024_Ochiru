@@ -3,17 +3,15 @@ using Cysharp.Threading.Tasks;
 using Doinject;
 using Kusoge;
 using Kusoge.GameStates;
-using Soar.Events;
+using Soar.Commands;
 using UnityEngine;
 
 namespace Contents.Gameplay
 {
     public class GameplayStateMachine : MonoBehaviour, IInjectableComponent
     {
-        [SerializeField] private GameEvent<string> setNextStateEvent;
-        
+        [SerializeField] private Command resetAppCommand;
         [SerializeField] private GameStateEnum initialState = GameStateEnum.Intro;
-        [SerializeField] private string gameEndSceneName = "MainMenu";
         
         private IReadOnlyDictionary<GameStateEnum, IGameState> gameStates;
         
@@ -39,7 +37,7 @@ namespace Contents.Gameplay
                 activeState = await gameStates[activeState].Running(destroyCancellationToken);
             }
             
-            setNextStateEvent.Raise(gameEndSceneName);
+            await resetAppCommand.ExecuteAsync();
         }
     }
 }
