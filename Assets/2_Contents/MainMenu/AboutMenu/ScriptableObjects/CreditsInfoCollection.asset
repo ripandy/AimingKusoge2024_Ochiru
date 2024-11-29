@@ -12,13 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4939fdcf4c4a4704ab2b83a1656edbc3, type: 3}
   m_Name: CreditsInfoCollection
   m_EditorClassIdentifier: 
-  defaultSubscribeBehavior: 0
-  _value:
-  - role: Developed by
-    names:
-    - Ripandy Adha
-  - role: Twitter
-    names:
-    - '@ripandy'
-  variableEventType: 0
+  list: []
+  valueEventType: 0
   autoResetValue: 0

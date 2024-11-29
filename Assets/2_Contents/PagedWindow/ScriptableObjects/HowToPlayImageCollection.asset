@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485136c7ccc5438ca61dc82506b7e7ac, type: 3}
   m_Name: HowToPlayImageCollection
   m_EditorClassIdentifier: 
-  defaultSubscribeBehavior: 0
-  _value: []
-  variableEventType: 0
+  list: []
+  valueEventType: 0
   autoResetValue: 0

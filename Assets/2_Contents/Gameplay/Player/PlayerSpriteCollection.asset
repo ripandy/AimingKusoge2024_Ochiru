@@ -44,4 +44,4 @@ MonoBehaviour:
   - <Key>k__BackingField: 96
     <Value>k__BackingField: {fileID: 21300000, guid: 3035ee6191ed7401db6ced6b2bfff994, type: 3}
   valueEventType: 0
-  autoResetValue: 1
+  autoResetValue: 0

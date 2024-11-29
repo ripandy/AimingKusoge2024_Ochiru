@@ -15,6 +15,7 @@ namespace Contents.Gameplay
     {
         [SerializeField] private GameEvent<DirectionEnum> playerDirection;
         [SerializeField] private GameEvent<bool> mouthOpenEvent;
+        [SerializeField] private GameEvent<bool> isEyeBlinkEvent;
         [SerializeField] private Variable<float> mouthColliderEnableDuration;
         [SerializeField] private PlayerSpriteCollection playerSpriteCollection;
         [SerializeField] private SpriteRenderer spriteRenderer;
@@ -24,12 +25,16 @@ namespace Contents.Gameplay
 
         private void Start()
         {
+            Debug.Log($"[{GetType().Name}] Start. playerSpriteCollection: {playerSpriteCollection.Count}");
             var s1 = playerDirection.Subscribe(OnPlayerDirection);
             var s2 = mouthOpenEvent.AsObservable().SubscribeAwait(OnMouthOpen, AwaitOperation.Drop);
             
-            // Setup Auto Blink
+#if UNITY_IOS && !UNITY_EDITOR
+            var s3 = isEyeBlinkEvent.Subscribe(OnBlink);
+#else
             var s3 = Observable.Interval(TimeSpan.FromSeconds(3))
-                .SubscribeAwait(async (_, token) => await TryUpdateBlink(token));
+                .SubscribeAwait(async (_, token) => await TryUpdateAutoBlink(token));
+#endif
 
             var s4 = currentSprite.Subscribe(UpdateSprite);
             
@@ -69,22 +74,32 @@ namespace Contents.Gameplay
             currentSprite.Value = (currentSprite.Value & ~PlayerSpriteEnum.Bite) | PlayerSpriteEnum.IdleMouthClosed;
         }
 
-        private async ValueTask TryUpdateBlink(CancellationToken token = default)
+        private async ValueTask TryUpdateAutoBlink(CancellationToken token = default)
         {
             const float blinkChance = 0.4f;
             if (Random.value > blinkChance || currentSprite.Value.HasFlag(PlayerSpriteEnum.Bite)) return;
             
-            currentSprite.Value = (currentSprite.Value & ~PlayerSpriteEnum.Idle) | PlayerSpriteEnum.Blink;
+            OnBlink(true);
             
             const float blinkDuration = 0.2f;
             await UniTask.Delay(TimeSpan.FromSeconds(blinkDuration), cancellationToken: token);
             
-            currentSprite.Value = (currentSprite.Value & ~PlayerSpriteEnum.Blink) | PlayerSpriteEnum.Idle;
+            OnBlink(false);
+        }
+
+        private void OnBlink(bool blink)
+        {
+            var newSprite = currentSprite.Value;
+            newSprite &= blink ? ~PlayerSpriteEnum.Idle : ~PlayerSpriteEnum.Blink;
+            newSprite |= blink ? PlayerSpriteEnum.Blink : PlayerSpriteEnum.Idle;
+            currentSprite.Value = newSprite;
         }
 
         private void UpdateSprite(PlayerSpriteEnum newSpriteFlag)
         {
+            Debug.Log($"[{GetType().Name}] UpdateSprite: {newSpriteFlag}");
             if (!playerSpriteCollection.TryGetValue(newSpriteFlag, out var sprite)) return;
+            Debug.Log($"[{GetType().Name}] Setting sprite: {newSpriteFlag}");
             spriteRenderer.sprite = sprite;
         }
 

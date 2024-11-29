@@ -72,7 +72,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5487462928751425614}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f686fd1a7919a4c0e8a606263638252b, type: 3}
   m_Name: 
@@ -156,5 +156,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerFlagEvent: {fileID: 11400000, guid: 9b55983f9987245539d5aea4e451a1e8, type: 2}
   triggerValueThreshold: 0.5
-  blendShapeToObserve: 26
-  reverseFlag: 1
+  blendShapeToObserve: 24
+  reverseFlag: 0
