@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Contents.Gameplay
 {
-    public class PlayerSpriteCollection : Collection<PlayerSpriteEnum, Sprite>
+    public class PlayerSpriteCollection : SoarDictionary<PlayerSpriteEnum, Sprite>
     {
     }
     

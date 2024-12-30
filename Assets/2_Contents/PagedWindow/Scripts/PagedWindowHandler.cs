@@ -8,7 +8,7 @@ namespace Feature.PagedWindow
 {
     public class PagedWindowHandler : MonoBehaviour
     {
-        [SerializeField] private Collection<Sprite> spriteCollection;
+        [SerializeField] private SoarList<Sprite> spriteCollection;
         [SerializeField] private PageCounterVariable pageCounter;
         [SerializeField] private Image pagePrefab;
         [SerializeField] private Transform container;

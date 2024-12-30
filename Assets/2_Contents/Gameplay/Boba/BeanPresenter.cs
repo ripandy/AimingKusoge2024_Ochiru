@@ -14,7 +14,7 @@ namespace Contents.Gameplay
 {
     public class BeanPresenter : MonoBehaviour, IBeanPresenter
     {
-        [SerializeField] private Collection<int, GameObject> beans;
+        [SerializeField] private SoarDictionary<int, GameObject> beans;
         [SerializeField] private GameObject beanPrefab;
         [SerializeField] private Transform launcher;
         [SerializeField] private Transform bobaContainer;

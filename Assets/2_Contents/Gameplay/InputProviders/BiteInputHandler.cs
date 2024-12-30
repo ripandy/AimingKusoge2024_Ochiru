@@ -22,7 +22,7 @@ namespace Contents.Gameplay
         [SerializeField] private GameEvent<int> bittenBeanEvent;
         
         [Header("Dependencies")]
-        [SerializeField] private Collection<int, GameObject> beans;
+        [SerializeField] private SoarDictionary<int, GameObject> beans;
         [SerializeField] private Collider2D mouthCollider;
 
         private IDisposable subscription;
