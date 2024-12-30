@@ -10,6 +10,7 @@
     "com.ripandy.soar": "file:/Users/ripandy.adha/Personal/Projects/Unity/SOAR_Unity/Packages/SOAR",
     "com.ripandy.transformmanagement": "file:/Users/ripandy.adha/Personal/Projects/Unity/ModuleCollections/TransformManagement",
     "com.unity.editorcoroutines": "1.0.0",
+    "com.unity.feature.2d": "2.0.1",
     "com.unity.ide.rider": "3.0.34",
     "com.unity.multiplayer.center": "1.0.0",
     "com.unity.performance.profile-analyzer": "1.2.2",
@@ -60,7 +61,8 @@
       "name": "Open UPM",
       "url": "https://package.openupm.com",
       "scopes": [
-        "com.cysharp"
+        "com.cysharp",
+        "jp.hadashikick"
       ]
     },
     {
