@@ -11,7 +11,19 @@ namespace Kusoge
         
         internal int CurrentHp { get; set; }
         internal int BeanEatenCount { get; set; }
-        public int ComboCount { get; set; }
+
+        private int comboCount;
+        public int ComboCount
+        {
+            get => comboCount;
+            set
+            {
+                comboCount = value;
+                MaxComboCount = Math.Max(MaxComboCount, comboCount);
+            }
+        }
+
+        public int MaxComboCount { get; internal set; }
         
         public DirectionEnum Direction { get; set; }
 
