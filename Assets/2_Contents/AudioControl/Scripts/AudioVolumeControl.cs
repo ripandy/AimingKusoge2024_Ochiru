@@ -1,3 +1,4 @@
+using System;
 using Soar.Variables;
 using UnityEngine;
 
@@ -7,11 +8,18 @@ namespace Feature.AudioControl
     public class AudioVolumeControl : MonoBehaviour
     {
         [SerializeField] private Variable<float> volumeVariable;
+        
+        private IDisposable subscription;
 
         private void Start()
         {
             if (!TryGetComponent<AudioSource>(out var audioSource)) return;
-            volumeVariable.Subscribe(value => audioSource.volume = value);
+            subscription = volumeVariable.Subscribe(value => audioSource.volume = value);
+        }
+        
+        private void OnDestroy()
+        {
+            subscription?.Dispose();
         }
     }
 }
