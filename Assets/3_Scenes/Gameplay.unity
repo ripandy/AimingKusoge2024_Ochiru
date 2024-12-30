@@ -2163,7 +2163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 965106905}
   m_Layer: 0
-  m_Name: AlternateInput
+  m_Name: AlternativeInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
