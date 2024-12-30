@@ -1,10 +1,11 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using LitMotion;
+using R3;
 using Soar.Events;
 using UnityEngine;
 using UnityEngine.UI;
+using DelayType = LitMotion.DelayType;
 
 namespace Feature.MainMenu
 {
@@ -14,55 +15,65 @@ namespace Feature.MainMenu
         [SerializeField] private string nextState = "Gameplay";
         [SerializeField] private Image[] mangaPanels;
 
-        private void Start() => AnimatePanels(destroyCancellationToken).Forget();
+        private async void Start()
+        {
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
+            
+            using var subscription = Observable.EveryValueChanged(this, _ => Input.anyKeyDown)
+                .Skip(1)
+                .Subscribe(_ => cts.Cancel());
+            
+            await AnimatePanels(cts.Token).SuppressCancellationThrow();
+            
+            setNextStateEvent.Raise(nextState);
+        }
 
-        private async UniTaskVoid AnimatePanels(CancellationToken token = default)
+        private async UniTask AnimatePanels(CancellationToken token = default)
         {
             foreach (var panel in mangaPanels)
             {
-                var color = panel.color;
-                color.a = 0;
-                panel.color = color;
+                UpdateAlpha(panel, 0);
             }
             
             const float duration = 0.8f;
             
-            await LMotion.Create(0f, 1f, duration).WithEase(Ease.InBack)
-                .Bind(alpha => UpdateAlpha(mangaPanels[0], alpha)).ToUniTask(cancellationToken: token);
+            var panelBase = LMotion.Create(0f, 1f, duration)
+                .WithEase(Ease.InBack)
+                .Bind(alpha => UpdateAlpha(mangaPanels[0], alpha));
             
-            await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
+            var panel1 = LMotion.Create(0f, 1f, duration)
+                .WithEase(Ease.InBack)
+                .WithDelay(duration)
+                .Bind(alpha => UpdateAlpha(mangaPanels[1], alpha));
             
-            await LMotion.Create(0f, 1f, duration).WithEase(Ease.InBack)
-                .Bind(alpha => UpdateAlpha(mangaPanels[1], alpha)).ToUniTask(cancellationToken: token);
+            var panelMidFadeIn = LMotion.Create(0f, 1f, duration)
+                .WithLoops(2, LoopType.Yoyo)
+                .WithEase(Ease.InBack)
+                .WithDelay(duration, delayType: DelayType.EveryLoop)
+                .Bind(alpha => UpdateAlpha(mangaPanels[2], alpha));
             
-            await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
+            var panel2 = LMotion.Create(0f, 1f, duration).WithEase(Ease.InBack)
+                .WithDelay(duration * 2)
+                .Bind(alpha => UpdateAlpha(mangaPanels[3], alpha));
             
-            await LMotion.Create(0f, 1f, duration).WithEase(Ease.InBack)
-                .Bind(alpha => UpdateAlpha(mangaPanels[2], alpha)).ToUniTask(cancellationToken: token);
+            var panel3 = LMotion.Create(0f, 1f, duration).WithEase(Ease.InBack)
+                .WithDelay(duration)
+                .Bind(alpha => UpdateAlpha(mangaPanels[4], alpha));
             
-            await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
+            var panel4 = LMotion.Create(0f, 1f, duration).WithEase(Ease.InBack)
+                .WithDelay(duration)
+                .Bind(alpha => UpdateAlpha(mangaPanels[5], alpha));
             
-            var panelMidFadeOut = LMotion.Create(1f, 0f, duration).WithEase(Ease.OutBack)
-                .Bind(alpha => UpdateAlpha(mangaPanels[2], alpha)).ToUniTask(cancellationToken: token);
-            
-            var panel2FadeIn = LMotion.Create(0f, 1f, duration).WithEase(Ease.InBack)
-                .Bind(alpha => UpdateAlpha(mangaPanels[3], alpha)).ToUniTask(cancellationToken: token);
-            
-            await UniTask.WhenAll(panelMidFadeOut, panel2FadeIn);
-            
-            await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
-            
-            await LMotion.Create(0f, 1f, duration).WithEase(Ease.InBack)
-                .Bind(alpha => UpdateAlpha(mangaPanels[4], alpha)).ToUniTask(cancellationToken: token);
-            
-            await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
-            
-            await LMotion.Create(0f, 1f, duration).WithEase(Ease.InBack)
-                .Bind(alpha => UpdateAlpha(mangaPanels[5], alpha)).ToUniTask(cancellationToken: token);
-            
-            await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
-            
-            setNextStateEvent.Raise(nextState);
+            await LSequence.Create()
+                .Append(panelBase)
+                .Append(panel1)
+                .Append(panelMidFadeIn)
+                .Join(panel2)
+                .Append(panel3)
+                .Append(panel4)
+                .AppendInterval(duration)
+                .Run()
+                .ToUniTask(CancelBehavior.Complete, cancellationToken: token);
         }
         
         private void UpdateAlpha(Image panel, float alpha)

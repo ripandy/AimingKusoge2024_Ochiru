@@ -27,7 +27,9 @@ namespace Feature.SplashScreen
 
         private async UniTask ShowSplash(CancellationToken token)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(splashDuration), cancellationToken: token);
+            await UniTask.WhenAny(
+                UniTask.WaitUntil(() => Input.anyKeyDown, cancellationToken: token),
+                UniTask.Delay(TimeSpan.FromSeconds(splashDuration), cancellationToken: token));
         }
     }
 }
