@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Kusoge.Interfaces;
 
 namespace Kusoge.GameStates
@@ -21,7 +22,7 @@ namespace Kusoge.GameStates
         private CancellationTokenSource cts;
         private CancellationToken Token => cts.Token;
 
-        private TaskCompletionSource<bool> tcs;
+        private UniTaskCompletionSource ucs;
 
         public PlayGameState(
             Player player,
@@ -46,19 +47,19 @@ namespace Kusoge.GameStates
         public async ValueTask<GameStateEnum> Running(CancellationToken cancellationToken = default)
         {
             cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-            tcs = new TaskCompletionSource<bool>();
+            ucs = new UniTaskCompletionSource();
             
-            HandlePlayerDirectionInput();
-            ExecuteBeanLauncher();
-            HandlePlayerBiteInput();
+            HandlePlayerDirectionInput().Forget();
+            ExecuteBeanLauncher().Forget();
+            HandlePlayerBiteInput().Forget();
 
-            await tcs.Task;
-            await Task.Yield();
+            await ucs.Task;
+            await UniTask.Yield();
             
             return GameStateEnum.GameOver;
         }
 
-        private async void HandlePlayerDirectionInput()
+        private async UniTaskVoid HandlePlayerDirectionInput()
         {
             try
             {
@@ -73,15 +74,15 @@ namespace Kusoge.GameStates
             }
             
             if (cts == null || Token.IsCancellationRequested) return;
-            HandlePlayerDirectionInput(); // Recursive Call
+            HandlePlayerDirectionInput().Forget(); // Recursive Call
         }
 
-        private async void ExecuteBeanLauncher()
+        private async UniTaskVoid ExecuteBeanLauncher()
         {
             try
             {
-                LaunchBean();
-                await Task.Delay(beanLauncher.LaunchDelay, Token);
+                LaunchBean().Forget();
+                await UniTask.Delay(beanLauncher.LaunchDelay, cancellationToken: Token);
             }
             catch (OperationCanceledException)
             {
@@ -89,16 +90,16 @@ namespace Kusoge.GameStates
             }
             
             if (cts == null || Token.IsCancellationRequested) return;
-            ExecuteBeanLauncher(); // Recursive Call
+            ExecuteBeanLauncher().Forget(); // Recursive Call
         }
 
-        private async void LaunchBean()
+        private async UniTaskVoid LaunchBean()
         {
             try
             {
                 var bean = beanLauncher.LaunchBean();
                 var dropped = await beanPresenter.Show(bean.Id, bean.ThrowDirection, Token);
-                await Task.Yield();
+                await UniTask.Yield();
                 beanLauncher.RemoveBean(bean.Id);
                 if (!dropped) return;
                 
@@ -107,7 +108,7 @@ namespace Kusoge.GameStates
             }
             catch (OperationCanceledException)
             {
-                tcs.TrySetResult(false);
+                ucs.TrySetResult();
                 return;
             }
             
@@ -116,10 +117,10 @@ namespace Kusoge.GameStates
             if (player.IsAlive) return;
 
             cts?.Cancel();
-            tcs.TrySetResult(true);
+            ucs.TrySetResult();
         }
 
-        private async void HandlePlayerBiteInput()
+        private async UniTaskVoid HandlePlayerBiteInput()
         {
             try
             {
@@ -139,7 +140,7 @@ namespace Kusoge.GameStates
             }
             
             if (cts == null || Token.IsCancellationRequested) return;
-            HandlePlayerBiteInput(); // Recursive Call
+            HandlePlayerBiteInput().Forget(); // Recursive Call
         }
 
         public void Dispose()
