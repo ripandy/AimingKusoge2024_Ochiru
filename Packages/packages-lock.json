@@ -28,7 +28,25 @@
       "url": "https://package.openupm.com"
     },
     "com.ripandy.appstatemanagement": {
-      "version": "file:/Users/ripandy.adha/Personal/Projects/Unity/ModuleCollections/AppStateManagement",
+      "version": "file:./../../ModuleCollections/AppStateManagement",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.cysharp.r3": "1.2.9",
+        "com.cysharp.unitask": "2.5.10",
+        "com.ripandy.soar": "0.7.0"
+      }
+    },
+    "com.ripandy.audiomanagement": {
+      "version": "file:./../../ModuleCollections/AudioManagement",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.ripandy.soar": "0.7.0"
+      }
+    },
+    "com.ripandy.debugtools": {
+      "version": "file:./../../ModuleCollections/DebugTools",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -38,7 +56,7 @@
       }
     },
     "com.ripandy.facedetectionhandler": {
-      "version": "file:/Users/ripandy.adha/Personal/Projects/Unity/ModuleCollections/FaceDetectionHandler",
+      "version": "file:./../../ModuleCollections/FaceDetectionHandler",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -48,7 +66,7 @@
       }
     },
     "com.ripandy.gridmanagement": {
-      "version": "file:/Users/ripandy.adha/Personal/Projects/Unity/ModuleCollections/GridManagement",
+      "version": "file:./../../ModuleCollections/GridManagement",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -57,8 +75,18 @@
         "com.ripandy.soar": "0.7.0"
       }
     },
+    "com.ripandy.modularscreens": {
+      "version": "file:./../../ModuleCollections/ModularScreens",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.ripandy.soar": "0.7.0",
+        "com.ripandy.soarextensions": "1.0.0",
+        "com.ripandy.audiomanagement": "1.0.0"
+      }
+    },
     "com.ripandy.screentransition": {
-      "version": "file:/Users/ripandy.adha/Personal/Projects/Unity/ModuleCollections/ScreenTransition",
+      "version": "file:./../../ModuleCollections/ScreenTransition",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -68,13 +96,22 @@
       }
     },
     "com.ripandy.soar": {
-      "version": "file:/Users/ripandy.adha/Personal/Projects/Unity/SOAR_Unity/Packages/SOAR",
+      "version": "file:./../../SOAR",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
+    "com.ripandy.soarextensions": {
+      "version": "file:./../../ModuleCollections/SoarExtensions",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.cysharp.r3": "1.2.9",
+        "com.ripandy.soar": "0.7.0"
+      }
+    },
     "com.ripandy.transformmanagement": {
-      "version": "file:/Users/ripandy.adha/Personal/Projects/Unity/ModuleCollections/TransformManagement",
+      "version": "file:./../../ModuleCollections/TransformManagement",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -343,7 +380,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arfoundation": {
-      "version": "6.0.3",
+      "version": "6.0.4",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -361,13 +398,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arkit": {
-      "version": "6.0.3",
+      "version": "6.0.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.xr.core-utils": "2.2.2",
         "com.unity.xr.management": "4.4.0",
-        "com.unity.xr.arfoundation": "6.0.3",
+        "com.unity.xr.arfoundation": "6.0.4",
         "com.unity.editorcoroutines": "1.0.0"
       },
       "url": "https://packages.unity.com"
