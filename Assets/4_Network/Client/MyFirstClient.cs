@@ -1,5 +1,4 @@
-using Cysharp.Net.Http;
-using Grpc.Net.Client;
+using MagicOnion;
 using MagicOnion.Client;
 using MagicOnionTest.Shared;
 using UnityEngine;
@@ -9,12 +8,12 @@ namespace Network.Client
 {
     public class MyFirstClient : MonoBehaviour
     {
+        private const string ServerUrl = "http://localhost:5000";
+        
         private async void Start()
         {
             // Connect to the server using gRPC channel.
-            var handler = new YetAnotherHttpHandler { Http2Only = true };
-            var channelOptions = new GrpcChannelOptions { HttpHandler = handler };
-            var channel = GrpcChannel.ForAddress("http://localhost:5000", channelOptions);
+            var channel = GrpcChannelx.ForAddress(ServerUrl);
 
             // NOTE: If your project targets non-.NET Standard 2.1, use `Grpc.Core.Channel` class instead.
             // var channel = new Channel("localhost", 5001, new SslCredentials());
