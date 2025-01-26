@@ -4,6 +4,7 @@ using MagicOnion.Unity;
 using MagicOnionTest.Shared;
 using MessagePack;
 using MessagePack.Resolvers;
+using MessagePack.Unity;
 using UnityEngine;
 
 namespace Network.Client
@@ -23,7 +24,9 @@ namespace Network.Client
                 MagicOnionGeneratedClientInitializer.Resolver,
                 SourceGeneratedFormatterResolver.Instance,
                 BuiltinResolver.Instance,
-                PrimitiveObjectResolver.Instance
+                PrimitiveObjectResolver.Instance,
+                StandardResolver.Instance,
+                UnityResolver.Instance
             );
 
             MessagePackSerializer.DefaultOptions = MessagePackSerializer.DefaultOptions
