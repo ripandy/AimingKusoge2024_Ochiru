@@ -1,76 +1,23 @@
-using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
-using MagicOnion;
 using MagicOnion.Client;
 using MagicOnionTest.Shared;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Network.Client
 {
-    public class GamingHubClient : MonoBehaviour, IGamingHubReceiver
+    public class GamingHubClient : IGamingHubReceiver
     {
-        private const string ServerUrl = "http://localhost:5000";
-        
-        private readonly CancellationTokenSource shutdownCancellation = new();
-        
-        private ChannelBase channel;
         private IGamingHub client;
         
         private readonly Dictionary<string, GameObject> players = new();
-        private GameObject playerObject;
         
-        private async void Start()
-        {
-            await InitializeClientAsync();
-        }
-        
-        private async void OnDestroy()
-        {
-            // Clean up Hub and channel
-            shutdownCancellation.Cancel();
-
-            if (client != null) await client.DisposeAsync();
-            if (channel != null) await channel.ShutdownAsync();
-        }
-        
-        private async Task InitializeClientAsync()
-        {
-            // Initialize the Hub
-            // NOTE: If you want to use SSL/TLS connection, see InitialSettings.OnRuntimeInitialize method.
-            channel = GrpcChannelx.ForAddress(ServerUrl);
-
-            while (!shutdownCancellation.IsCancellationRequested)
-            {
-                try
-                {
-                    Debug.Log("Connecting to the server...");
-                    playerObject = await ConnectAsync(channel, "RoomName", "PlayerName");
-                    Debug.Log("Connection is established.");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError(e);
-                }
-
-                Debug.Log($"Failed to connect to the server. Retry after 5 seconds...");
-                await Task.Delay(5 * 1000);
-            }
-        }
-
         public async ValueTask<GameObject> ConnectAsync(ChannelBase grpcChannel, string roomName, string playerName)
         {
             client = await StreamingHubClient.ConnectAsync<IGamingHub, IGamingHubReceiver>(grpcChannel, this);
-
-            var roomPlayers = await client.JoinAsync(roomName, playerName, Vector3.zero, Quaternion.identity);
-            foreach (var player in roomPlayers)
-            {
-                (this as IGamingHubReceiver).OnJoin(player);
-            }
-
+            await client.JoinAsync(roomName, playerName, Vector3.zero, Quaternion.identity);
             return players[playerName];
         }
 
@@ -114,7 +61,7 @@ namespace Network.Client
 
             if (players.TryGetValue(player.Name, out var cube))
             {
-                Destroy(cube);
+                Object.Destroy(cube);
             }
         }
 
